@@ -1,10 +1,10 @@
 project "SampleLibrary"
-   kind "StaticLib"
+   kind "ConsoleApp"
    language "C++"
    cppdialect "C++20"
    staticruntime "off"
 
-   location  (prjectdir .. "/%{prj.name}-" .. _ACTION)
+    -- location  (prjectdir .. "/%{prj.name}")
    targetdir (binarydir .. "/%{prj.name}")
    objdir    (objectdir .. "/%{prj.name}")
 
@@ -20,4 +20,5 @@ project "SampleLibrary"
       defines { }
 
    filter "configurations:Dist"
+      kind "WindowedApp"
       defines { }

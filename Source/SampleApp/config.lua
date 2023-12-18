@@ -4,7 +4,7 @@ project "SampleApp"
    cppdialect "C++17"
    staticruntime "off"
 
-   location  (prjectdir .. "/%{prj.name}-" .. _ACTION)
+   -- location  (prjectdir .. "/%{prj.name}")
    targetdir (binarydir .. "/%{prj.name}")
    objdir    (objectdir .. "/%{prj.name}")
 

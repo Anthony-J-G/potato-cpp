@@ -28,7 +28,7 @@ DIRTY_DIRECTORIES = [
     ".\\Intermediate",
 ]
 DIRTY_FILE_TYPES = {
-    ".vcxproj", ".sln", ".user"
+    ".vcxproj", ".sln"
 }
 
 
@@ -87,10 +87,7 @@ def CullDirectories() -> None:
 
 def CullFiles(files: list[str]) -> None:
     for file in files:
-        try:
-            os.remove(file)
-        except FileNotFoundError:
-            continue
+        os.remove(file)
 
 
 def PrintFiles(files: list[str]) -> None:

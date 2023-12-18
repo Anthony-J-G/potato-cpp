@@ -8,13 +8,12 @@ workspace "SampleCodebase"
    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
    binarydir = "../../Binaries/" .. outputdir
-   prjectdir = "../../Intermediate/ProjectFiles/"
+   prjectdir = "../../Intermediate/ProjectFiles/" .. outputdir
    objectdir = "../../Intermediate/Objects/" .. outputdir
 
    group "Core"
       include "Source/SampleApp/config.lua"
       include "Source/SampleLibrary/config.lua"
-      include "Source/SampleDLL/config.lua"
    group ""
 
    filter "system:windows"
