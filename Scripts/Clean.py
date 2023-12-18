@@ -28,7 +28,7 @@ DIRTY_DIRECTORIES = [
     ".\\Intermediate",
 ]
 DIRTY_FILE_TYPES = {
-    ".vcxproj", ".sln"
+    ".vcxproj", ".sln", ".user"
 }
 
 
