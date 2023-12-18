@@ -1,5 +1,5 @@
-project "SampleLibrary"
-   kind "StaticLib"
+project "SampleDLL"
+   kind "SharedLib"
    language "C++"
    cppdialect "C++20"
    staticruntime "off"
