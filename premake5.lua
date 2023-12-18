@@ -8,7 +8,7 @@ workspace "SampleCodebase"
    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
    binarydir = "../../Binaries/" .. outputdir
-   prjectdir = "../../Intermediate/ProjectFiles/" .. outputdir
+   prjectdir = "../../Intermediate/ProjectFiles/"
    objectdir = "../../Intermediate/Objects/" .. outputdir
 
    group "Core"
