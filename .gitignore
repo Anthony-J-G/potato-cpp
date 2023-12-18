@@ -108,7 +108,7 @@
 # Ignore Unix backup files
 *~
 
-# Projects and makefiles
+# Ignore projects and makefiles
 *.cmake
 *.mk
 *.dsp
@@ -127,6 +127,23 @@ Makefile
 Makefile.*
 Settings.settings
 
-# External Libraries
-!Libraries/Premake5/
+# Add exception for premake5 build system
+!Libraries/Premake5/premake5.exe
+!Libraries/Premake5/LICENSE.txt
+
+# Ignore External Libraries
 Libraries/
+
+# Ignore intermediate folders
+Intermediate/
+obj/
+
+# Ignore VS / VS Code settings directory
+.vs
+.vscode
+
+# Ignore CLion directory
+.idea/
+
+# Annoying windows files
+[Dd]esktop.ini
