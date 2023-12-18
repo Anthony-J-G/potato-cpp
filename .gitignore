@@ -67,6 +67,7 @@
 
 # Script files
 !*.bat
+!*.lua
 !*.sh
 !*.pl
 !*.py
@@ -105,6 +106,11 @@
 !VERSION
 !ChangeLog
 
+# Add exception for premake5 build system
+!Libraries/Premake5/premake5.exe
+!Libraries/Premake5/LICENSE.txt
+
+
 # Ignore Unix backup files
 *~
 
@@ -126,10 +132,6 @@ Dockerfile
 Makefile
 Makefile.*
 Settings.settings
-
-# Add exception for premake5 build system
-!Libraries/Premake5/premake5.exe
-!Libraries/Premake5/LICENSE.txt
 
 # Ignore External Libraries
 Libraries/
