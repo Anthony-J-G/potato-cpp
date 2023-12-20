@@ -1,12 +1,26 @@
 project "SampleApp"
    kind "ConsoleApp"
    language "C++"
-   cppdialect "C++17"
+   cppdialect "C++20"
    staticruntime "off"
 
    location  (prjectdir .. "/%{prj.name}-" .. _ACTION)
-   targetdir (binarydir .. "/%{prj.name}")
    objdir    (objectdir .. "/%{prj.name}")
+   targetdir (binarydir .. "/%{prj.name}")
+
+   includedirs {
+      "../SampleLibrary/include",
+      "../SampleDLL/include"
+   }
+
+   dependson {
+      "SampleDLL"
+   }
+
+   links {
+      "SampleLibrary"
+
+   }
 
    files { "src/**.h", "src/**.hpp", "src/**.cpp", "src/**.cc", "src/**.c" }
 

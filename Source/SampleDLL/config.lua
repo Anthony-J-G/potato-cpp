@@ -1,12 +1,12 @@
-project "SampleLibrary"
-   kind "StaticLib"
+project "SampleDLL"
+   kind "SharedLib"
    language "C++"
    cppdialect "C++20"
    staticruntime "off"
 
    location  (prjectdir .. "/%{prj.name}-" .. _ACTION)
    objdir    (objectdir .. "/%{prj.name}")
-   targetdir (binarydir .. "/%{prj.name}")
+   targetdir (binarydir)
 
    srcdir = path.getabsolute("src")
    headerfiledir = path.getabsolute("include")

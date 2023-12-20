@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 
+#include "hello_statement.h"
+
 using namespace std;
 
 int main()
@@ -13,4 +15,7 @@ int main()
         cout << word << " ";
     }
     cout << endl;
+
+    PrintSecretMessage();
+
 }
