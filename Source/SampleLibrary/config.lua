@@ -13,7 +13,8 @@ project "SampleLibrary"
    
    postbuildcommands {
       "{RMDIR} " .. headerfiledir,
-      "{COPYDIR} " .. srcdir .. "\\*.h " .. headerfiledir
+      "{COPYDIR} " .. srcdir .. "\\*.h " .. headerfiledir,
+      "{COPYDIR} " .. srcdir .. "\\*.hpp " .. headerfiledir,
    }
 
    files { "src/**.h", "src/**.hpp", "src/**.cpp", "src/**.cc", "src/**.c" }

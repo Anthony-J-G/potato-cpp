@@ -6,14 +6,15 @@ project "SampleDLL"
 
    location  (prjectdir .. "/%{prj.name}-" .. _ACTION)
    objdir    (objectdir .. "/%{prj.name}")
-   targetdir (binarydir)
+   targetdir (binarydir .. "/%{prj.name}")
 
    srcdir = path.getabsolute("src")
    headerfiledir = path.getabsolute("include")
-   
+
    postbuildcommands {
       "{RMDIR} " .. headerfiledir,
-      "{COPYDIR} " .. srcdir .. "\\*.h " .. headerfiledir
+      "{COPYDIR} " .. srcdir .. "\\*.h " .. headerfiledir,
+      "{COPYDIR} " .. srcdir .. "\\*.hpp " .. headerfiledir,
    }
 
    files { "src/**.h", "src/**.hpp", "src/**.cpp", "src/**.cc", "src/**.c" }

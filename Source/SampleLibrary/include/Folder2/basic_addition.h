@@ -1,4 +1,5 @@
 #pragma once
 
 
-float AddTwoNumbers();
+
+float AddTwoNumbers(float x, float y);
