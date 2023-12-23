@@ -106,10 +106,22 @@
 !VERSION
 !ChangeLog
 
+# Ignore 3rd party libraries by default
+[Ll]ibraries/**
+[Ll]ib/**
+[Ll]ibs/**
+[Vv]endor/**
 # Add exception for premake5 build system
+!Libraries/Premake5
 !Libraries/Premake5/premake5.exe
 !Libraries/Premake5/LICENSE.txt
 
+# Add exception for Empress Engine Submodule
+!/Libraries/EmpressEngine
+
+# Ignore all generated binaries by default
+[Bb]inaries/**
+[Bb]in/**
 
 # Ignore Unix backup files
 *~
@@ -133,12 +145,28 @@ Makefile
 Makefile.*
 Settings.settings
 
-# Ignore External Libraries
-Libraries/
+# Ignore 3rd party libraries by default
+[Ll]ibraries/**
+[Ll]ib/**
+[Ll]ibs/**
+[Vv]endor/**
+# Add exception for premake5 build system
+!Libraries/Premake5
+!Libraries/Premake5/premake5.exe
+!Libraries/Premake5/LICENSE.txt
+
+# Ignore all generated binaries by default
+[Bb]inaries/
+[Bb]inaries/**
+[Bb]in/
+[Bb]in/**
 
 # Ignore intermediate folders
-Intermediate/
-obj/
+[Ii]ntermediate/
+[Ii]ntermediate/**
+[Bb]in-[Ii]nt/
+[Bb]in-[Ii]nt/**
+[Oo]bj/
 
 # Ignore VS / VS Code settings directory
 .vs

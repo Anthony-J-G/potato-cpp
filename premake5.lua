@@ -1,5 +1,16 @@
 -- Main Project Script (premake5.lua)
 
+
+IncludeDir = {}
+
+
+LibraryDir = {}
+
+
+Library = {}
+
+
+
 workspace "PotatoCpp"
    architecture "x64"
    configurations { "Debug", "Release", "Dist" }
@@ -19,21 +30,17 @@ workspace "PotatoCpp"
 
    filter "system:windows"
       systemversion "latest"
-      defines { }
 
    filter "configurations:Debug"
-      defines { }
       runtime "Debug"
       symbols "On"
 
    filter "configurations:Release"
-      defines { }
       runtime "Release"
       optimize "On"
       symbols "On"
 
    filter "configurations:Dist"
-      defines { }
       runtime "Release"
       optimize "On"
       symbols "Off"

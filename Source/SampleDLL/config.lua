@@ -11,6 +11,10 @@ project "SampleDLL"
    srcdir = path.getabsolute("src")
    headerfiledir = path.getabsolute("include")
 
+   includedir {
+      srcdir
+   }
+
    postbuildcommands {
       "{RMDIR} " .. headerfiledir,
       "{COPYDIR} " .. srcdir .. "\\*.h " .. headerfiledir,
