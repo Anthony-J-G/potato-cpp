@@ -1,9 +1,12 @@
 # Potato C++
 
-Sample project for generating C++ project structures. This project was generated with [Potato C++](https://github.com/Anthony-J-G/potato-cpp) version 1.0.0.
+Sample project for generating C++ project structures. See the template repository, [Potato C++](https://github.com/Anthony-J-G/potato-cpp) version 1.0.0, hosted on Github.
 
 
-## Project File Generation
+## Development
+
+If you wish to compile the repository from the source, see the [building instructions](Docs/BUILDING.md) in `Docs/BUILDING.md`.
+
 
 Potato C++ requires [Premake5](https://premake.github.io) for generation of project files.
 
