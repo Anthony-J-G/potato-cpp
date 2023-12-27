@@ -116,9 +116,6 @@
 !Libraries/Premake5/premake5.exe
 !Libraries/Premake5/LICENSE.txt
 
-# Add exception for Empress Engine Submodule
-!/Libraries/EmpressEngine
-
 # Ignore all generated binaries by default
 [Bb]inaries/**
 [Bb]in/**
