@@ -151,6 +151,10 @@ Settings.settings
 [Bb]in-[Ii]nt/**
 [Oo]bj/
 
+# Ignore Misc. Build Folders
+[Bb]uild/
+[Bb]uild/**
+
 # Ignore VS / VS Code settings directory
 .vs
 .vscode
