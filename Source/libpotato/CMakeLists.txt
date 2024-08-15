@@ -1,49 +1,32 @@
 add_library(libpotato STATIC)
 set_target_properties(libpotato PROPERTIES PREFIX "")
 set_property(TARGET libpotato PROPERTY CXX_STANDARD 20)
-# Need to set C11 for libgfxd (_Alignas)
 set_property(TARGET libpotato PROPERTY C_STANDARD 11)
 
 set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-option(USE_OPENGLES "Enable GLES3" OFF)
-option(GFX_DEBUG_DISASSEMBLER "Enable libgfxd" OFF)
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 endif()
 
 #=================== Top-Level ===================
+file(GLOB_RECURSE Header_Files__Root RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.h" "src/*.hpp")
+file(GLOB_RECURSE Source_Files__Root RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.cpp" "src/*.c")
 
-file(GLOB_RECURSE Source_Files__Utils RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.h" "src/*.cpp" "src/*.hpp" "src/*.c")
+source_group("Header Files" FILES ${Header_Files__Root})
+source_group("Source Files" FILES ${Source_Files__Root})
 
-source_group("" FILES ${Source_Files__Utils})
-target_sources(libpotato PRIVATE ${Source_Files__Utils})
+target_sources(libpotato PRIVATE ${Header_Files__Root})
+target_sources(libpotato PRIVATE ${Source_Files__Root})
 
 #=================== Packages & Includes ===================
 
 target_include_directories(libpotato
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../extern ${CMAKE_CURRENT_BINARY_DIR} $<$<BOOL:${GFX_DEBUG_DISASSEMBLER}>:${CMAKE_CURRENT_SOURCE_DIR}/../../ZAPDTR/lib/libgfxd>
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../extern ${CMAKE_CURRENT_BINARY_DIR}
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${INCLUDE_DIR} ${ADDITIONAL_LIB_INCLUDES}
 )
 
 #=================== Linking ===================
-if(NOT EXCLUDE_MPQ_SUPPORT)
-    if (NOT CMAKE_SYSTEM_NAME STREQUAL "Windows")
-        target_link_libraries(libpotato PUBLIC "$<LINK_LIBRARY:WHOLE_ARCHIVE,storm>")
-    else()
-        target_link_libraries(libpotato PUBLIC storm)
-    endif()
-endif()
-
-target_link_libraries(libpotato
-    PUBLIC ImGui
-)
-
-target_link_libraries(libpotato PRIVATE stb)
-
-if (GFX_DEBUG_DISASSEMBLER)
-    target_link_libraries(libpotato PRIVATE libgfxd)
-endif()
 
 
 

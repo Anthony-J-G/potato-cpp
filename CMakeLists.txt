@@ -36,3 +36,4 @@ endif()
 
 # =========== Sources =============
 add_subdirectory("Source/libpotato")
+add_subdirectory("Source/testpotato")
