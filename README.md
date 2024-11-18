@@ -1,4 +1,4 @@
-# Potato C++
+# Lib Potato
 
 Sample project for generating C++ project structures. See the template repository, [Potato C++](https://github.com/Anthony-J-G/potato-cpp) version 1.0.0, hosted on Github.
 
