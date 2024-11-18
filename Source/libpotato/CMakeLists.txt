@@ -1,13 +1,16 @@
-add_library(libpotato STATIC)
-set_target_properties(libpotato PROPERTIES PREFIX "")
-set_property(TARGET libpotato PROPERTY CXX_STANDARD 20)
-set_property(TARGET libpotato PROPERTY C_STANDARD 11)
-
-set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
+if (BUILD_SHARED_LIBS)
+    set(LIBRARY_OUTPUT_NAME libpotato_shared)
+else()
+    set(LIBRARY_OUTPUT_NAME libpotato)
 endif()
+
+add_library(${LIBRARY_OUTPUT_NAME})
+
+set_target_properties(${LIBRARY_OUTPUT_NAME} PROPERTIES PREFIX "")
+set_property(TARGET ${LIBRARY_OUTPUT_NAME} PROPERTY CXX_STANDARD 20)
+set_property(TARGET ${LIBRARY_OUTPUT_NAME} PROPERTY C_STANDARD 11)
+
+set(libpotato_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
 
 #=================== Top-Level ===================
 file(GLOB_RECURSE Header_Files__Root RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.h" "src/*.hpp")
@@ -16,18 +19,32 @@ file(GLOB_RECURSE Source_Files__Root RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*
 source_group("Header Files" FILES ${Header_Files__Root})
 source_group("Source Files" FILES ${Source_Files__Root})
 
-target_sources(libpotato PRIVATE ${Header_Files__Root})
-target_sources(libpotato PRIVATE ${Source_Files__Root})
+target_sources(${LIBRARY_OUTPUT_NAME} PRIVATE ${Header_Files__Root})
+target_sources(${LIBRARY_OUTPUT_NAME} PRIVATE ${Source_Files__Root})
 
 #=================== Packages & Includes ===================
 
-target_include_directories(libpotato
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../extern ${CMAKE_CURRENT_BINARY_DIR}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${INCLUDE_DIR} ${ADDITIONAL_LIB_INCLUDES}
+target_include_directories(${LIBRARY_OUTPUT_NAME}
+    PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/../extern
+        ${CMAKE_CURRENT_BINARY_DIR}
+    PUBLIC 
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${INCLUDE_DIR}
+        ${ADDITIONAL_LIB_INCLUDES}
 )
 
 #=================== Linking ===================
 
+
+
+# ================== Build Commands ===========================
+add_custom_command(
+    TARGET ${LIBRARY_OUTPUT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/libpotato
+)
 
 
 #=================== Compile Options & Defs ===================
@@ -49,7 +66,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "iOS")
 endif()
 
 if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
-    target_compile_definitions(libpotato PRIVATE
+    target_compile_definitions(${LIBRARY_OUTPUT_NAME} PRIVATE
         $<$<CONFIG:Debug>:_DEBUG>
         $<$<NOT:$<CONFIG:Debug>>:NDEBUG>
         $<$<CONFIG:Debug>:SPDLOG_ACTIVE_LEVEL=0>
@@ -78,7 +95,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
         )
     endif()
 else()
-    target_compile_definitions(libpotato PRIVATE
+    target_compile_definitions(${LIBRARY_OUTPUT_NAME} PRIVATE
         ENABLE_OPENGL
         $<$<CONFIG:Debug>:_DEBUG>
         $<$<NOT:$<CONFIG:Debug>>:NDEBUG>
@@ -90,7 +107,7 @@ else()
 endif()
 
 if(MSVC)
-    target_compile_options(libpotato PRIVATE
+    target_compile_options(${LIBRARY_OUTPUT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
             /Od;
             /Oi-
@@ -106,7 +123,7 @@ if(MSVC)
         ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT};
         ${DEFAULT_CXX_EXCEPTION_HANDLING};
     )
-    target_link_options(libpotato PRIVATE
+    target_link_options(${LIBRARY_OUTPUT_NAME} PRIVATE
         $<$<CONFIG:Release>:
             /OPT:REF;
             /OPT:ICF
@@ -116,7 +133,7 @@ if(MSVC)
 endif()
 
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU|Clang")
-	target_compile_options(libpotato PRIVATE
+	target_compile_options(${LIBRARY_OUTPUT_NAME} PRIVATE
 		-Wall
 		-Wextra
 		-Wno-error

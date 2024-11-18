@@ -128,7 +128,7 @@ Makefile
 Makefile.*
 Settings.settings
 # Add exception for CMake support files
-!External/cmake/**/*.cmake
+!Config/cmake/**/*.cmake
 
 # Ignore 3rd party libraries by default
 [Ll]ibraries/**

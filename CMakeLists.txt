@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24.0)
+cmake_minimum_required(VERSION 3.5)
 
 option(NON_PORTABLE "Build a non-portable version" OFF)
 
@@ -10,6 +10,8 @@ endif()
 
 project(libpotato LANGUAGES C CXX)
 
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
 if (CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "iOS")
     enable_language(OBJCXX)
     set(CMAKE_OBJC_FLAGS "${CMAKE_OBJC_FLAGS} -fobjc-arc")
@@ -20,7 +22,6 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 
-include(External/cmake/Utils.cmake)
 set(ADDITIONAL_LIB_INCLUDES "")
 
 # ========= Configuration Options =========
@@ -36,4 +37,4 @@ endif()
 
 # =========== Sources =============
 add_subdirectory("Source/libpotato")
-add_subdirectory("Source/testpotato")
+add_subdirectory("Source/libpotato_test")
